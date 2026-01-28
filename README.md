@@ -18,7 +18,7 @@ A beautiful, physics-driven progress indicator / loader with **swarm snakes** th
 
    STATUS:
 
- - atm circle works fine, and progress or loading, set colors, nr of snakes...  
+ - atm circle works fine, and progress or loading, fadein and out...  
 
      
 zipped Sample exe and project included, enjoy :D  
