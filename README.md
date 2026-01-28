@@ -15,9 +15,10 @@ A beautiful, physics-driven progress indicator / loader with **swarm snakes** th
 - **Indeterminate** (endless loop) or **Determinate** (real progress)  
     
    
-
-   STATUS:
-
+  sample video https://www.youtube.com/watch?v=SQUPDRk8VUk   
+    
+   STATUS:    
+   
  - atm circle works fine, and progress or loading, fadein and out...  
 
      
