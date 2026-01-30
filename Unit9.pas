@@ -65,7 +65,7 @@ end;
 
 procedure TForm9.SpinBox1Change(Sender: TObject);
 begin
-  FProgress.Position := SpinBox1.Value;
+  FProgress.XPosition := SpinBox1.Value;
 end;
 
 procedure TForm9.startClick(Sender: TObject);
