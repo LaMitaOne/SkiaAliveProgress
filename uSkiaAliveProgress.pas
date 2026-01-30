@@ -16,7 +16,6 @@ type
   TEntranceStyle = (enFade,   { Simply fades in }
     enGrow,   { Grows from scale 0 }
     enImplode){ Implodes from outside };
-
   { TExitStyle: Determines how the snakes disappear when animation stops }
   TExitStyle = (exFade,      { Simply fades out }
     exExplode,   { Explodes outward }
@@ -56,7 +55,6 @@ type
     { Physics for "Black Hole" exit mode }
     X, Y: Single; // Cartesian coordinates when leaving the track
   end;
-
   { TSkiaAliveProgress: The main visual component }
   TSkiaAliveProgress = class(TSkCustomControl)
   private
@@ -77,7 +75,7 @@ type
     FRebelColor: TAlphaColor;   // Color of the "Rebel" (the unique particle)
 
     { Logic }
-    FPosition: Single;          // 0..100 for Determinate mode
+    FXPosition: Single;          // 0..100 for Determinate mode
     FState: (stIdle, stActive, stExiting);
 
     { Internal Helpers }
@@ -99,7 +97,7 @@ type
     procedure AnimateIn;  // Triggers the entrance animation
     procedure AnimateOut; // Triggers the exit animation
 
-    property Position: Single read FPosition write FPosition;
+    property XPosition: Single read FXPosition write FXPosition;
   published
     { Standard FMX Properties }
     property Align;
@@ -119,7 +117,6 @@ type
   end;
 
 implementation
-
 { TSkiaAliveProgress }
 
 constructor TSkiaAliveProgress.Create(AOwner: TComponent);
@@ -138,13 +135,13 @@ begin
   FGlowAmount := 4.0;
   FEntranceStyle := enGrow;      // Entrance animation
   FExitStyle := exBlackHole;     // Exit animation
-  FPosition := 0;
+  FXPosition := 0;
   FState := stIdle;
 
   // --- Timer Setup ---
   // We create a standard TTimer for the animation loop (~60 FPS -> 16ms)
   FTimer := TTimer.Create(nil);
-  FTimer.Interval := 16;
+  FTimer.Interval := 32;
   FTimer.OnTimer := TimerLoop;
 
   // --- Swarm Initialization ---
@@ -291,7 +288,7 @@ begin
   LCenter := LRect.CenterPoint;
 
   // Calculate the normalized progress (0.0 to 1.0)
-  LProgressOffset := FPosition / 100.0;
+  LProgressOffset := FXPosition / 100.0;
 
   for var I := 0 to High(FSnakes) do
   begin
@@ -412,7 +409,6 @@ var
   PathBuilder: ISkPathBuilder;
   Path: ISkPath;
   Paint: ISkPaint;
-
   { Variables for Appearance Calculations }
   Sway: Single;
   Center: TPointF;
@@ -422,13 +418,11 @@ var
   LRadius: Single;
   LAngle: Single;
   LSweepAngle: Single;
-
   { Variables for Gradient }
   HeadColor, TailColor: TAlphaColor;
   HeadPoint, TailPoint: TPointF;
   GradientPoints: TArray<TPointF>;
   GradientColors: TArray<TAlphaColor>;
-
   { Variables for Dynamic Sizing }
   BaseSize: Single;
   DynamicThickness: Single;
@@ -447,7 +441,7 @@ begin
 
   if LIsRebel then
     LColor := FRebelColor
-  else if (FMode = pmDeterminate) and (Snake.Offset < (FPosition / 100)) then
+  else if (FMode = pmDeterminate) and (Snake.Offset < (FXPosition / 100)) then
     LColor := FProgressColor
   else
     LColor := FSwarmColor;
