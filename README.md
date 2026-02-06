@@ -1,5 +1,7 @@
 # SkiaAliveProgress
 Delphi RADStudio skia4delphi Sci-Fi Swarm Loader / Progress bar component  
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/LaMitaOne/SkiaAliveProgress)
    
 ### TSkiaAliveProgress v 0.1 – Sci-Fi Swarm Loader / Progress  
 
